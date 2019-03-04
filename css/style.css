@@ -53,6 +53,9 @@ a.button {
 .button:hover{
     background: rgba(255,128,0,0.9);
 }
+.hide{
+    display: none;
+}
 input[type*="search"]::placeholder {
   color: #fff;
   opacity: 1; /* Firefox */
@@ -69,7 +72,7 @@ input[type*="search"]::-ms-input-placeholder { /* Microsoft Edge */
     /*max-width: 1480px;*/
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px 20px 10px 20px;
     position: fixed;
     left: 0;
     right: 0;
@@ -79,6 +82,16 @@ input[type*="search"]::-ms-input-placeholder { /* Microsoft Edge */
 .header > div {
     display: inline-block;
     vertical-align: middle;
+}
+.header .login a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header .login {
+    display: block;
+    text-align: right;
+    margin-bottom: 10px;
 }
 header nav {
     display: inline-block;
