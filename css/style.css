@@ -42,13 +42,15 @@ table {
     width: 100%;
 }
 .button,
-a.button {
+a.button,
+input[type="submit"] {
     background: rgba(255,128,0,1);
     color: #fff;
     text-decoration: none;
     padding: 10px 20px;
     font-weight: 600;
     letter-spacing: 0.9px;
+    border: 0;
 }
 .button:hover{
     background: rgba(255,128,0,0.9);
@@ -56,15 +58,16 @@ a.button {
 .hide{
     display: none;
 }
+.container--register input::placeholder,
 input[type*="search"]::placeholder {
   color: #fff;
   opacity: 1; /* Firefox */
 }
-
+.container--register input:-ms-input-placeholder,
 input[type*="search"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
  color: #fff;
 }
-
+.container--register input:-ms-input-placeholder,
 input[type*="search"]::-ms-input-placeholder { /* Microsoft Edge */
  color: #fff;
 }
@@ -286,12 +289,20 @@ span.link-text {
 /*end Home*/
 
 /*Login*/
+.form-register-wrapper {
+    padding: 50px 0;
+    position: relative;
+    z-index: 2;
+}
+.container.container--register * {
+    color: #fff;
+}
 .form_login, 
 .form_register {
     max-width: 500px;
     margin: 0 auto;
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 40px 20px;
 }
 .form_login input, .form_register input, .form_register select {
     display: block;
@@ -300,17 +311,51 @@ span.link-text {
     padding: 5px 10px;
     height: 50px;
     font-size: 18px;
+    background: transparent;
+    border: 1px solid #fff;
+}
+.form_login input[type="submit"],
+.form_register input[type="submit"] {
+    background: rgba(255,128,0,1);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    letter-spacing: 0.9px;
+    border: 0;
+    cursor: pointer;
 }
 .form_login-header, 
 .form_register-header{
     margin-bottom: 10px;
+}
+.container.container--register {
+    padding: 150px 0;
+    background-image: url(../images/danny-gallegos-376799-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+.container.container--register:after {
+    content: "";
+    background: rgba(0,0,0,0.7);
+    /* -webkit-margin-after-collapse: collapse; */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.form_register  select.city option {
+    color: #000 !important;
 }
 /*end Login*/
 
 
 /*Footer*/
 footer{
-    padding-top: 30px;
+    margin-top: 30px;
 }
 .footer-content{
    /* max-width: 1480px;*/
@@ -412,6 +457,11 @@ ul.tabs_links.products-categories > li {
     .container-content_right *{
         font-size: 15px !important;
     }
+}
+.container-content_right h2 {
+    margin: 20px;
+    text-align: center;
+    font-size: 25px;
 }
 ul.tabs_links.products-categories {
     text-align: center;
