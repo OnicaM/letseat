@@ -40,6 +40,7 @@ ul:not(.list){
 table {
     border-collapse: collapse;
     width: 100%;
+    border-spacing: 0;
 }
 .button,
 a.button,
@@ -438,6 +439,20 @@ ul.tabs_links.products-categories > li {
 .tab-content .tab.active{
     display: block;
 }
+.container-content_right {
+    display: block;
+    font-size: 0;
+    vertical-align: top;
+    box-shadow: 7px -3px 132px -15px rgba(248,200,125,0.75) inset;
+    -webkit-box-shadow: 7px -3px 132px -15px rgba(248,200,125,0.75) inset;
+    -moz-box-shadow: 7px -3px 132px -15px rgba(248,200,125,0.75) inset;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+.container-content_left *,
+.container-content_right *{
+    font-size: 15px;
+}
 @media(min-width: 768px){
     .container-content_left {
         width: 69%;
@@ -446,17 +461,11 @@ ul.tabs_links.products-categories > li {
         float: left;
     }
     .container-content_right {
-        display: inline-block;
         width: 30%;
-        font-size: 0;
-        vertical-align: top;
+        display: inline-block;
         float: right;
-        border: 1px solid;
     }
-    .container-content_left *,
-    .container-content_right *{
-        font-size: 15px !important;
-    }
+    
 }
 .container-content_right h2 {
     margin: 20px;
@@ -465,7 +474,7 @@ ul.tabs_links.products-categories > li {
 }
 ul.tabs_links.products-categories {
     text-align: center;
-    margin: 0px 0 20px 0;
+    margin: 0px 0 40px 0;
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
 }
@@ -478,20 +487,83 @@ ul.tabs_links.products-categories {
     padding-top: 20px;
     margin-top: 20px;
 }
+/*
+.order-box_item td span {
+    display: inline-block;
+    width: auto;
+}
+.order-box_item td.order-box_item.order-box_item-quantity span{
+    max-width: 50px;
+}
+*/
 .order-box_details .order-box_item {
     display: block;
     width: 100%;
     margin-bottom: 10px;
     padding: 5px;
 }
+table.order-box_container tr {
+    display: table-row;
+    width: 100%;
+}
+table.order-box_container td{
+    vertical-align: top;
+    padding: 3px 2px;
+    text-align: center;
+}
+table.order-box_container td.remove {
+    width: 5%;
+}
+table.order-box_container td.order-box_item.order-box_item-name {
+    width: 65%;
+    text-align: left;
+}
+table.order-box_container td.order-box_item.order-box_item-price {
+    width: 15%;
+    vertical-align: middle;
+}
+table.order-box_container .order-box_item td span input{
+    width: 100%;
+    max-width: 40px;
+}
+table.order-box_container .remove button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: red;
+}
+.tab-content.products-menu tr{
+    box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
+}
+.tab-content.products-menu tr:hover{
+    box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
+    -webkit-box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
+    -moz-box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
+    min-height: 40px;
+}
 .products-menu td {
-    padding: 5px;
+    padding: 7px 14px;
+}
+.tab-content.products-menu tr:hover td {
+    padding: 14px 14px;
 }
 .products-menu table tr td:first-child {
     width: 80%;
     text-align: left;
 }
-
+.tab-content.products-menu button {
+    color: orange;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-left: 10px;
+}
+.tab-content.products-menu button .fa-plus-square:before {
+    font-size: 19px;
+}
 .products-menu table tr td {
     width: 20%;
     text-align: right;
