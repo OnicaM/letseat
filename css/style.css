@@ -81,7 +81,7 @@ input[type*="search"]::-ms-input-placeholder { /* Microsoft Edge */
     left: 0;
     right: 0;
     background: rgba(0,0,0,0.6);
-    z-index: 3;
+    z-index: 4;
 }
 .header > div {
     display: inline-block;
