@@ -187,6 +187,14 @@ header nav {
     display: inline-block;
     color: #fff;
 }
+@media(max-width: 800px){
+    .banner-slider{
+        width: 100%;
+    }
+    .banner {
+        min-height: 320px;
+    }
+}
 .categories {
     margin-top: 60px;
 }
@@ -208,6 +216,70 @@ header nav {
     background: rgba(255,255,255,0.2);
 }
 
+
+@media(max-width: 1024px) and (min-width: 801px){
+    .categories ul li a {
+        font-size: 18px;
+        padding: 15px 18px;
+    }
+}
+.categories--mobile{
+    display: none;
+}
+@media(max-width: 800px){
+    .categories--mobile{
+        display: block;
+        position: relative;
+        z-index: 3;
+    }
+    .categories--desktop{
+        display: none;
+    }
+    .categories.categories--mobile ul li,
+    .categories.categories--mobile ul li a {
+        display: block;
+        transform: skewX(0deg);
+        text-align: center;
+    }
+    .categories--mobile ul {
+        margin: 0;
+        position: absolute;
+        /* background: #000; */
+        left: 20px;
+        right: 55px;
+        height: 0;
+        overflow: hidden;
+        transition: all 1s;
+    }
+    .categories.categories--mobile ul li a{
+        padding: 10px 20px;
+    }
+    .categories.categories--mobile ul li{
+        margin: 0 0 5px 0;
+        background: rgba(0,0,0,0.7);
+    }
+    .categories_dropdown{
+        border: 1px solid #000;
+        margin-right: 5px;
+        transition: all 2s;
+        transform: skewX(-29deg);
+        margin: 0 40px;
+        text-align: center;
+        background: rgba(0,0,0,0.5);
+    }
+    .categories_dropdown > span,
+    .categories_dropdown > i{
+        color: #fff;
+        font-size: 20px;
+        text-decoration: none;
+        padding: 20px 25px;
+        display: inline-block;
+        transform: skewX(29deg);
+    }
+    .categories--mobile.active ul{
+        height: auto;
+    }
+}
 /*Container*/
 .container-content{
     max-width: 1480px;
@@ -356,7 +428,7 @@ span.link-text {
 
 /*Footer*/
 footer{
-    margin-top: 30px;
+   /* margin-top: 30px;*/
 }
 .footer-content{
    /* max-width: 1480px;*/
@@ -534,21 +606,39 @@ table.order-box_container .remove button {
     color: red;
 }
 .tab-content.products-menu tr{
-    box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px -4px 27px -5px rgba(0,0,0,0.75);
+    box-shadow: -1px 6px 5px -4px rgba(0,0,0,0.25);
+    -webkit-box-shadow: -1px 6px 5px -4px rgba(0,0,0,0.25);
+    -moz-box-shadow: -1px 6px 5px -4px rgba(0,0,0,0.25);
+    border: 1px solid rgb(233,233,233);
 }
 .tab-content.products-menu tr:hover{
-    box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
+   /* box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
     -webkit-box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
     -moz-box-shadow: -7px 0px 39px -7px rgba(0,0,0,0.78) inset;
-    min-height: 40px;
+    min-height: 40px;*/
 }
 .products-menu td {
     padding: 7px 14px;
 }
 .tab-content.products-menu tr:hover td {
-    padding: 14px 14px;
+   /* padding: 14px 14px;*/
+}
+.products-menu table tr td > span {
+    display: block;
+}
+.products-menu table tr td > span.product-description {
+    padding: 6px 0 0 0;
+    font-style: italic;
+    font-size: 13px;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: all 0.5s;
+}
+.products-menu table tr:hover td > span.product-description {
+    padding: 10px 0 0 0;
+    height: 100%;
+    cursor: default;
 }
 .products-menu table tr td:first-child {
     width: 80%;
@@ -560,6 +650,7 @@ table.order-box_container .remove button {
     border: 0;
     padding: 0;
     margin-left: 10px;
+    cursor: pointer;
 }
 .tab-content.products-menu button .fa-plus-square:before {
     font-size: 19px;

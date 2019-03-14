@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script type="text/javascript" src="js/script.js"></script>
       <title>Let's Eat</title>
    </head>
    <body>
@@ -37,7 +38,7 @@
                      <a href="#" class="button">Comanda</a>
                   </div>
                </div>
-               <div class="categories">
+               <div class="categories categories--desktop">
                   <ul>
                      <li><a href="#">Traditional</a></li>
                      <li><a href="#">Chinezesc</a></li>
@@ -47,9 +48,21 @@
                      <li><a href="#">Raw Vegan</a></li>
                   </ul>
                </div>
+
             </div>
          </section>
          <section class="container">
+            <div class="categories categories--mobile">
+                  <div class="categories_dropdown" id="categoriesD" onclick="displayMobileNav();"><span>Categorii mancare</span> <i class="fas fa-angle-down"></i></div>
+                  <ul>
+                     <li><a href="#">Traditional</a></li>
+                     <li><a href="#">Chinezesc</a></li>
+                     <li><a href="#">Arabesc</a></li>
+                     <li><a href="#">Fast Food</a></li>
+                     <li><a href="#">Pizza</a></li>
+                     <li><a href="#">Raw Vegan</a></li>
+                  </ul>
+               </div>
             <div class="container-content">
                <div class="container-title">
                   <h1>Restaurante</h1>
