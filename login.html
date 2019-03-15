@@ -8,25 +8,47 @@
       <script type="text/javascript" src="js/script.js"></script>
       <title>Let's Eat</title>
    </head>
-   <body>
+   <body id="body">
       <header class="header clearfix">
-         <div class="login"><a href="login.html">Log in</a></div>
          <div class="header-logo">
             <span>LeT's EaT</span>
          </div>
-         <nav class="nav">
-            <ul>
-               <li><a href="index.html">Home</a></li>
-               <li><a href="about.html">About</a></li>
-               <li><a href="index.html">Restaurants</a></li>
-               <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-         </nav>
-         <div class="search">
-            <form>
-               <input type="search" name="search">
-               <button><i class="fas fa-search"></i></button>
-            </form>
+         <div class="header_desktop-content">
+            <nav class="nav">
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="restaurants.html">Restaurants</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li class="login"><a href="login.html">Log in</a></li>
+               </ul>
+            </nav>
+            <div class="search">
+               <form>
+                  <input type="search" name="search" placeholder="Search...">
+                  <button><i class="fas fa-search"></i></button>
+               </form>
+            </div>
+         </div>
+         <div class="header_mobile-content">
+            <div class="toggle-menu" onclick="displayMobileNav();"><i class="fas fa-bars"></i></div>
+            <div class="header_mobile--inner">
+               <div class="search">
+                  <form>
+                     <input type="search" name="search" placeholder="Search...">
+                     <button><i class="fas fa-search"></i></button>
+                  </form>
+               </div>
+                <nav class="nav--mobile">
+                   <ul>
+                     <li><a href="index.html">Home</a></li>
+                     <li><a href="about.html">About</a></li>
+                     <li><a href="restaurants.html">Restaurants</a></li>
+                     <li><a href="contact.html">Contact Us</a></li>
+                     <li class="login"><a href="login.html">Log in</a></li>
+                  </ul>
+               </nav>
+            </div>
          </div>
       </header>
       <main>

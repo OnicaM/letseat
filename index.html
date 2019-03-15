@@ -8,107 +8,97 @@
       <script type="text/javascript" src="js/script.js"></script>
       <title>Let's Eat</title>
    </head>
-   <body>
+   <body id="body">
       <header class="header clearfix">
-         <div class="login"><a href="login.html">Log in</a></div>
          <div class="header-logo">
             <span>LeT's EaT</span>
          </div>
-         <nav class="nav">
-            <ul>
-               <li><a href="index.html">Home</a></li>
-               <li><a href="about.html">About</a></li>
-               <li><a href="index.html">Restaurants</a></li>
-               <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-         </nav>
-         <div class="search">
-            <form>
-               <input type="search" name="search">
-               <button><i class="fas fa-search"></i></button>
-            </form>
+         <div class="header_desktop-content">
+           <!--  <div class="login"><a href="login.html">Log in</a></div> -->
+            <nav class="nav">
+               <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="restaurants.html">Restaurants</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li class="login"><a href="login.html">Log in</a></li>
+               </ul>
+            </nav>
+            <div class="search">
+               <form>
+                  <input type="search" name="search" placeholder="Search...">
+                  <button><i class="fas fa-search"></i></button>
+               </form>
+            </div>
+         </div>
+         <div class="header_mobile-content">
+            <div class="toggle-menu" onclick="displayMobileNav();"><i class="fas fa-bars"></i></div>
+            <div class="header_mobile--inner">
+               <div class="search">
+                  <form>
+                     <input type="search" name="search" placeholder="Search...">
+                     <button><i class="fas fa-search"></i></button>
+                  </form>
+               </div>
+                <nav class="nav--mobile">
+                   <ul>
+                     <li><a href="index.html">Home</a></li>
+                     <li><a href="about.html">About</a></li>
+                     <li><a href="restaurants.html">Restaurants</a></li>
+                     <li><a href="contact.html">Contact Us</a></li>
+                     <li class="login"><a href="login.html">Log in</a></li>
+                  </ul>
+               </nav>
+            </div>
          </div>
       </header>
       <main>
-         <section class="banner">
-            <div class="banner-content">
-               <div class="banner-slider">
-                  <div class="slider-item">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar. Etiam enim dui, luctus id consequat a, bibendum in turpis. Nam ut felis lorem. Proin finibus, libero in pharetra dictum, risus leo gravida justo, sit amet tempus nisl nunc vel dui. Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
-                     <a href="#" class="button">Comanda</a>
-                  </div>
-               </div>
-               <div class="categories categories--desktop">
-                  <ul>
-                     <li><a href="#">Traditional</a></li>
-                     <li><a href="#">Chinezesc</a></li>
-                     <li><a href="#">Arabesc</a></li>
-                     <li><a href="#">Fast Food</a></li>
-                     <li><a href="#">Pizza</a></li>
-                     <li><a href="#">Raw Vegan</a></li>
-                  </ul>
-               </div>
-
-            </div>
-         </section>
-         <section class="container">
-            <div class="categories categories--mobile">
-                  <div class="categories_dropdown" id="categoriesD" onclick="displayMobileNav();"><span>Categorii mancare</span> <i class="fas fa-angle-down"></i></div>
-                  <ul>
-                     <li><a href="#">Traditional</a></li>
-                     <li><a href="#">Chinezesc</a></li>
-                     <li><a href="#">Arabesc</a></li>
-                     <li><a href="#">Fast Food</a></li>
-                     <li><a href="#">Pizza</a></li>
-                     <li><a href="#">Raw Vegan</a></li>
-                  </ul>
-               </div>
-            <div class="container-content">
-               <div class="container-title">
-                  <h1>Restaurante</h1>
-               </div>
-               <div class="boxes">
-                  <div class="boxes_item boxes_item--indian">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 1</span> <i class="fas fa-arrow-right"></i></a>
+         <section class="container container--home">
+            <div class="container-content clearfix">
+                  
+                  <h1 class="title">Let's seat <br>and let's eat</h1>
+                  <div class="promo float-left">
+                     <div class="promo-box">
+                        <div class="promo-box--inner">
+                           <div class="slider">
+                              <span class="box-title">Promotii</span>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar. Etiam enim dui, luctus id consequat a, bibendum in turpis. Nam ut felis lorem. Proin finibus, libero in pharetra dictum, risus leo gravida justo, sit amet tempus nisl nunc vel dui. Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
+                           </div>
+                        </div>
                      </div>
-                  </div>
-                  <div class="boxes_item boxes_item--salad">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 2</span> <i class="fas fa-arrow-right"></i></a>
+                     <div class="promo-box">
+                        <div class="promo-box--inner">
+                           <span class="box-title">Categorii</span>
+                           <ul>
+                              <li><a href="#">Traditional</a></li>
+                              <li><a href="#">Chinezesc</a></li>
+                              <li><a href="#">Arabesc</a></li>
+                              <li><a href="#">Fast Food</a></li>
+                              <li><a href="#">Pizza</a></li>
+                              <li><a href="#">Raw Vegan</a></li>
+                           </ul>
+                        </div>
                      </div>
+                   </div>
+                  <div class="quick-order float-right">
+                      <div class="smiley"><i class="far fa-smile-beam"></i></div>
+                      <div class="quick-order_content">
+                        <div class="quick-order--inner">
+                            <p>Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
+                            <div class="quick-order_select">
+                               <select>
+                                  <option>Alege restaurantul</option>
+                                  <option>Babs</option>
+                                  <option>Bisto Carol 26</option>
+                                  <option>Mudi</option>
+                                  <option>Geppetto</option>
+                                  <option>Grill House</option>
+                               </select>
+                            </div>
+                        </div>
+                      </div>
+                      
                   </div>
-                  <div class="boxes_item boxes_item--pizza">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 3</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-                  <div class="boxes_item boxes_item--indian">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 4</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-                  <div class="boxes_item boxes_item--salad">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 5</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-                  <div class="boxes_item boxes_item--pizza">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 6</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-                  <div class="boxes_item boxes_item--indian">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 7</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-                  <div class="boxes_item boxes_item--salad">
-                     <div class="boxes_item-content">
-                        <a href="order.html" class="link"><span class="link-text">Bistro 8</span> <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                  </div>
-               </div>
             </div>
          </section>
       </main>
