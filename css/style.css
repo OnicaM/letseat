@@ -1001,3 +1001,34 @@ table.order-box_container .remove button {
         text-align: right;
     }
 }
+a.add-to-cart {
+    text-decoration: none;
+    cursor: pointer;
+    color: orange;
+    text-align: center;
+}
+span.total-price {
+    padding: 10px;
+    display: block;
+    margin-top: 20px;
+    border-top: 1px solid;
+    text-align: right;
+}
+.cart-head {
+    padding: 20px;
+}
+.product-quantity{
+    float: left;
+    margin-right: 10px;
+}
+a.button.empty-cart-btn {
+    float: right;
+    background: none;
+    color: #000;
+    padding: 0;
+}
+.remove {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
