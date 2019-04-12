@@ -261,13 +261,13 @@ var generateRestaurants = function(){
 
 }
 var restaurantsCateg = function(){
-     products.forEach(function(item) {
+    products.forEach(function(item) {
     var restaurantEl = document.createElement('div');
     restaurantEl.classList.add('boxes_item','boxes_item--indian');
     restaurantEl.innerHTML = `<div class="boxes_item-content">
                                     <a href="order.html" class="link"><span class="link-text">${item.restaurant}</span> <i class="fas fa-arrow-right"></i></a>
                                  </div>`;
-        boxes.appendChild(restaurantEl);
+        if(restaurantEl){boxes.appendChild(restaurantEl);}
         
     });
 }
@@ -275,7 +275,7 @@ var restaurantsCateg = function(){
 
 // search
 
-var searchInput = document.querySelector('.search input').value;
+// var searchInput = document.querySelector('.search input').value;
 
 var findRestaurants = function(myRestaurants, title){
     var titleReturned = myRestaurants.find(function(item, index){
@@ -284,19 +284,21 @@ var findRestaurants = function(myRestaurants, title){
     return titleReturned;
 }
 
-findRestaurants(products, searchInput);
+//findRestaurants(products, searchInput);
+
+
+// searchInput.addEventListener('keyup',function(event){
+//     event.preventDefault();
+//     findRestaurants(products, searchInput);
+//     restaurantsCateg();
+// });
+
 var init = function() {
     generateProductList();
-    restaurantsCateg();
+    
     setupListeners();
+    restaurantsCateg();
 }
 init();
-
-searchInput.addEventListener('keyup',function(event){
-    event.preventDefault();
-    findRestaurants(products, searchInput);
-    restaurantsCateg();
-});
-
 
 
