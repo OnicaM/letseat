@@ -285,18 +285,18 @@ var findRestaurants = function(myRestaurants, title){
 }
 
 findRestaurants(products, searchInput);
-
-
-searchInput.addEventListener('keyup',function(event){
-    event.preventDefault();
-    findRestaurants(products, searchInput);
-    restaurantsCateg();
-});
 var init = function() {
     generateProductList();
     restaurantsCateg();
     setupListeners();
 }
 init();
+
+searchInput.addEventListener('keyup',function(event){
+    event.preventDefault();
+    findRestaurants(products, searchInput);
+    restaurantsCateg();
+});
+
 
 
