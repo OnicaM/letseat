@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="css/style.css">
-      <script type="text/javascript" src="js/script.js"></script>
+      
       <title>Let's Eat</title>
    </head>
    <body id="body">
@@ -25,7 +25,7 @@
             </nav>
             <div class="search">
                <form>
-                  <input type="search" name="search" placeholder="Search...">
+                  <input type="search" name="search" onkeyup="findRestaurants()" placeholder="Search...">
                   <button><i class="fas fa-search"></i></button>
                </form>
             </div>
@@ -62,12 +62,12 @@
                </div>
                <div class="categories categories--desktop">
                   <ul>
-                     <li><a href="#">Traditional</a></li>
-                     <li><a href="#">Chinezesc</a></li>
-                     <li><a href="#">Arabesc</a></li>
-                     <li><a href="#">Fast Food</a></li>
-                     <li><a href="#">Pizza</a></li>
-                     <li><a href="#">Raw Vegan</a></li>
+                     <li><a href="#traditional">Traditional</a></li>
+                     <li><a href="#chinezesc">Chinezesc</a></li>
+                     <li><a href="#arabesc">Arabesc</a></li>
+                     <li><a href="#fastfood">Fast Food</a></li>
+                     <li><a href="#pizza">Pizza</a></li>
+                     <li><a href="#rawvegan">Raw Vegan</a></li>
                   </ul>
                </div>
 
@@ -77,12 +77,12 @@
             <div class="categories categories--mobile">
                   <div class="categories_dropdown" id="categoriesD" onclick="displayCatNav();"><span>Categorii mancare</span> <i class="fas fa-angle-down"></i></div>
                   <ul>
-                     <li><a href="#">Traditional</a></li>
-                     <li><a href="#">Chinezesc</a></li>
-                     <li><a href="#">Arabesc</a></li>
-                     <li><a href="#">Fast Food</a></li>
-                     <li><a href="#">Pizza</a></li>
-                     <li><a href="#">Raw Vegan</a></li>
+                     <li><a href="#traditional">Traditional</a></li>
+                     <li><a href="#chinezesc">Chinezesc</a></li>
+                     <li><a href="#arabesc">Arabesc</a></li>
+                     <li><a href="#fastfood">Fast Food</a></li>
+                     <li><a href="#pizza">Pizza</a></li>
+                     <li><a href="#rawvegan">Raw Vegan</a></li>
                   </ul>
                </div>
             <div class="container-content">
@@ -90,7 +90,7 @@
                   <h1>Restaurante</h1>
                </div>
                <div class="boxes">
-                  <div class="boxes_item boxes_item--indian">
+                 <!--  <div class="boxes_item boxes_item--indian">
                      <div class="boxes_item-content">
                         <a href="order.html" class="link"><span class="link-text">Bistro 1</span> <i class="fas fa-arrow-right"></i></a>
                      </div>
@@ -129,7 +129,7 @@
                      <div class="boxes_item-content">
                         <a href="order.html" class="link"><span class="link-text">Bistro 8</span> <i class="fas fa-arrow-right"></i></a>
                      </div>
-                  </div>
+                  </div> -->
                </div>
             </div>
          </section>
@@ -150,5 +150,6 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
          </div>
       </footer>
+      <script type="text/javascript" src="js/script.js"></script>
    </body>
 </html>
