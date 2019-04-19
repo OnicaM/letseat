@@ -587,8 +587,11 @@ span.link-text {
     text-decoration: none;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
+    transition: all 1s;
 }
-
+.boxes_item-content a.link:hover{
+    height: 100%;
+}
 .boxes_item .boxes_item-content {
     background-position: center;
     background-size: cover;
@@ -1031,4 +1034,35 @@ a.button.empty-cart-btn {
     color: red;
     font-weight: bold;
     text-decoration: none;
+}
+
+.quick-order_select > span {
+    display: block;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+}
+.quick-order_select ul li {
+    display: block;
+    
+}
+
+.quick-order_select ul {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #ccc;
+    display: none;
+}
+.quick-order_select ul li a {
+    display: block;
+    text-decoration: none;
+    color: #222;
+    padding: 10px;
+}
+.quick-order_select ul li a:hover{
+    background: #0079fa;
+    color: #fff;
+}
+.quick-order_select.active ul{
+    display: block;
 }
