@@ -2,6 +2,7 @@ function displayCatNav() {
     var element = document.getElementById("categoriesD");
     element.parentElement.classList.toggle("active");
 }
+
 function toggleRestaurants() {
     var pick = document.getElementById("pick");
     pick.parentElement.classList.toggle("active");
@@ -12,7 +13,7 @@ function displayMobileNav() {
     element.classList.toggle("js--mobile");
 }
 window.addEventListener("load", function() {
-    // store tabs variable
+
     var myTabs = document.querySelectorAll("ul.tabs_links > li");
 
     function myTabClicks(tabClickEvent) {
@@ -33,7 +34,7 @@ window.addEventListener("load", function() {
     }
     for (i = 0; i < myTabs.length; i++) {
         myTabs[i].addEventListener("click", myTabClicks)
-        //console.log(myTabs[i]);
+
     }
 });
 
@@ -49,7 +50,8 @@ login.addEventListener('click', function() {
 
 /*Content of table*/
 var tableItems = document.querySelector('.table-items'),
-    orderList = document.querySelector('.order-box_container'),
+    productsMenu = document.querySelectorAll('.products-menu div');
+orderList = document.querySelector('.order-box_container'),
     productQuantityEl = document.querySelector(".product-quantity"),
     emptyCartEl = document.querySelector(".empty-cart-btn"),
     remove = document.querySelector('.remove'),
@@ -120,7 +122,7 @@ var products = [{
         }
     ],
     productsInCart = [];
-orderStored = [];
+    orderStored = [];
 
 var generateProductList = function() {
     products.forEach(function(item) {
@@ -134,33 +136,19 @@ var generateProductList = function() {
                                 <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
                             </td>`;
         if (tableItems) {
-            tableItems.appendChild(productEl);
-
-            switch (item.category) {
-                case "paste":
-                    tablePasta.appendChild(productEl);
-                    break;
-                case "burgeri":
-                    tableBurgers.appendChild(productEl);
-                    break;
-                case "ciorbe":
-                    tableSoup.appendChild(productEl);
-                    break;
-                case "meniu":
-                    tableMenu.appendChild(productEl);
-                    break;
-                case "salate":
-                    tableSalad.appendChild(productEl);
-                    break;
-                default:
-                    tableItems.appendChild(productEl);
-
-            }
-
+            checkTableId(item.category, productEl);
         }
     });
 }
-
+var checkTableId = function(checkId, prod) {
+    var parent = document.getElementById(checkId);
+    productsMenu.forEach(function(index) {
+        if (checkId === index.id) {
+            var children = parent.querySelector('.table-items');
+            children.appendChild(prod);
+        }
+    });
+}
 
 var generateCartList = function() {
     orderList.innerHTML = "";
@@ -189,16 +177,26 @@ var generateCartButtons = function() {
 }
 
 var setupListeners = function() {
-    tableItems.addEventListener("click", function(event) {
-        var button = event.target;
-        if (button.classList.contains("add-to-cart")) {
-            var buttonId = button.dataset.id;
-            addToCart(buttonId);
-        }
 
-        console.log(productsInCart);
 
-    });
+    productsMenu.forEach(function(index) {
+        var parent = document.getElementById(index.id);
+
+        var children = parent.querySelector('.table-items');
+        children.addEventListener("click", function(event) {
+            var button = event.target;
+            if (button.classList.contains("add-to-cart")) {
+                var buttonId = button.dataset.id;
+                addToCart(buttonId);
+            }
+
+            console.log(productsInCart);
+
+        });
+    })
+
+
+
     tableCart.addEventListener('click', function(event) {
         var btnRem = event.target;
         if (btnRem.classList.contains("remove")) {
@@ -267,7 +265,6 @@ var addToCart = function(id) {
             if (item.product.id === obj.id) {
                 item.quantity++;
             }
-            //console.log(obj);
         });
     }
     generateCartList();
@@ -302,7 +299,7 @@ var restaurantsCateg = function() {
         restaurantEl.innerHTML = `<div class="boxes_item-content">
                                     <a href="order.html?page=${item.restaurant}" class="link"><span class="link-text">${item.restaurant}</span> <i class="fas fa-arrow-right"></i></a>
                                  </div>`;
-        //boxes.appendChild(restaurantEl);
+    
 
         if (boxes) {
             boxes.appendChild(restaurantEl);
@@ -311,28 +308,12 @@ var restaurantsCateg = function() {
 }
 
 
-
-// search
-
-// var searchInput = document.querySelector('.search input').value;
-
 var findRestaurants = function(myRestaurants, title) {
     var titleReturned = myRestaurants.find(function(item, index) {
         return item.restaurant.toLowerCase() === title.toLowerCase();
     });
     return titleReturned;
 }
-
-//findRestaurants(products, searchInput);
-
-
-// searchInput.addEventListener('keyup',function(event){
-//     event.preventDefault();
-//     findRestaurants(products, searchInput);
-//     restaurantsCateg();
-// });
-
-
 
 
 function getUrlVars() {
