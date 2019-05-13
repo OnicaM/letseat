@@ -1,0 +1,19 @@
+{
+  "name": "letseat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnicaM/letseat.git"
+  },
+  "author": "Oana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OnicaM/letseat/issues"
+  },
+  "homepage": "https://github.com/OnicaM/letseat#readme"
+}

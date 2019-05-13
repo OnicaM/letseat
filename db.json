@@ -1,0 +1,111 @@
+{
+	"city": [
+		{"id": 1, "name":"Craiova"},
+		{"id": 2, "name":"Bucuresti"},
+		{"id": 3, "name":"Timisoara"}
+	],
+	"restaurants": [
+		{"id":1, "name":"Bistro26",      "categoryId":2, "class":"traditional"},
+		{"id":2, "name":"Mudy",          "categoryId":3, "class":"arabic"},
+		{"id":3, "name":"Gepetto",       "categoryId":1, "class":"pizza"},
+		{"id":4, "name":"Casa Ghincea",  "categoryId":2, "class":"traditional"},
+		{"id":5, "name":"Holand",        "categoryId":4, "class":"fastfood"},
+		{"id":6, "name":"Spartan",       "categoryId":5, "class":"greek"},
+		{"id":7, "name":"Mythos",        "categoryId":5, "class":"greek"},
+		{"id":8, "name":"El Greco",      "categoryId":5, "class":"greek"},
+		{"id":9, "name":"My Way",        "categoryId":1, "class":"pizza"},
+		{"id":10,"name":"Ibiza",         "categoryId":1, "class":"pizza"},
+		{"id":10,"name":"Jack's Burger", "categoryId":4, "class":"fastfood"}
+		
+	],
+	"category": [
+		{"id":1 ,"name":"Pizza"},
+		{"id":2 ,"name":"Traditional"},
+		{"id":3 ,"name":"Arabesc"},
+		{"id":4 ,"name":"Fast food"},
+		{"id":5 ,"name":"Grecesc"}
+
+	],
+	"food":[
+		{
+			"restaurantsId": 1,
+			"id": 1,
+			"name":"Prajitura",
+			"description":"ingrediente",
+			"category": "desert",
+			"price": 20
+		},
+		{
+			"restaurantsId": 1,
+			"id": 2,
+			"name":"Carbonara",
+			"description":"sos,ciuperci,bacon",
+			"category": "pizza",
+			"price": 20
+		},
+		{
+			"restaurantsId": 3,
+			"id": 3,
+			"name":"Diavola",
+			"description":"sos,ciuperci,bacon",
+			"category": "pizza",
+			"price": 20
+		},
+		{
+			"restaurantsId": 3,
+			"id": 4,
+			"name":"Pizza",
+			"description":"sos,ciuperci,bacon",
+			"category": "pizza",
+			"price": 20
+		},
+		{
+			"restaurantsId": 3,
+			"id": 5,
+			"name":"Paste Siciliene",
+			"description":"sos,ciuperci,bacon",
+			"category": "paste",
+			"price": 18
+		},
+		{
+			"restaurantsId": 1,
+			"id": 6,
+			"name":"Paste",
+			"description":"paste, sos, apa",
+			"category": "paste",
+			"price": 20
+		},
+		{
+			"restaurantsId": 1,
+			"id": 7,
+			"name":"Souvlaky",
+			"description":"ingrediente",
+			"category": "meniu",
+			"price": 20
+		},
+		{
+			"restaurantsId": 1,
+			"id": 8,
+			"name":"Mancare",
+			"description":"ingrediente",
+			"category": "meniu",
+			"price": 20
+		},
+		{
+			"restaurantsId": 4,
+			"id": 9,
+			"name":"Mancare",
+			"description":"ingrediente",
+			"category": "meniu",
+			"price": 20
+		},
+		{
+			"restaurantsId": 4,
+			"id": 10,
+			"name":"Mancare",
+			"description":"ingrediente",
+			"category": "meniu",
+			"price": 20
+		}
+	]
+}

@@ -2,52 +2,6 @@ function displayCatNav() {
     var element = document.getElementById("categoriesD");
     element.parentElement.classList.toggle("active");
 }
-
-function toggleRestaurants() {
-    var pick = document.getElementById("pick");
-    pick.parentElement.classList.toggle("active");
-}
-
-function displayMobileNav() {
-    var element = document.getElementById("body");
-    element.classList.toggle("js--mobile");
-}
-window.addEventListener("load", function() {
-
-    var myTabs = document.querySelectorAll("ul.tabs_links > li");
-
-    function myTabClicks(tabClickEvent) {
-        for (var i = 0; i < myTabs.length; i++) {
-            myTabs[i].classList.remove("active");
-        }
-        var clickedTab = tabClickEvent.currentTarget;
-        clickedTab.classList.add("active");
-        tabClickEvent.preventDefault();
-        var myContentPanes = document.querySelectorAll(".tab");
-        for (i = 0; i < myContentPanes.length; i++) {
-            myContentPanes[i].classList.remove("active");
-        }
-        var anchorReference = tabClickEvent.target;
-        var activePaneId = anchorReference.getAttribute("href");
-        var activePane = document.querySelector(activePaneId);
-        activePane.classList.add("active");
-    }
-    for (i = 0; i < myTabs.length; i++) {
-        myTabs[i].addEventListener("click", myTabClicks)
-
-    }
-});
-
-/*Switch login*/
-var login = document.querySelector('.login');
-login.addEventListener('click', function() {
-
-    var registerContainer = document.querySelector('.form_register');
-    var loginContainer = document.querySelector('.form_login');
-    registerContainer.classList.remove('hide');
-    loginContainer.classList.add('hide');
-});
-
 /*Content of table*/
 var tableItems = document.querySelector('.table-items'),
     productsMenu = document.querySelectorAll('.products-menu div');
@@ -66,79 +20,144 @@ var tablePasta = document.querySelector('#paste .table-items'),
     tableMenu = document.querySelector('#meniu .table-items'),
     tableBurgers = document.querySelector('#burgeri .table-items');
 
-var products = [{
-            id: 0,
-            restaurant: "Bistro26",
-            type: "traditional",
-            category: "salate",
-            name: "Salata Caesar",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 20
-        },
-        {
-            id: 1,
-            restaurant: "Mudy",
-            type: "traditional",
-            category: "paste",
-            name: "Paste Quatro Formagi",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 25,
-        },
-        {
-            id: 2,
-            restaurant: "Gepetto",
-            type: "chinezesc",
-            category: "burgeri",
-            name: "Burger Classic",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 209
-        },
-        {
-            id: 3,
-            restaurant: "GrillHouse",
-            type: "pizza",
-            category: "burgeri",
-            name: "Burger Double",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 30
-        },
-        {
-            id: 4,
-            restaurant: "Holand",
-            type: "fastfood",
-            category: "paste",
-            name: "Paste fructe de mare",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 45
-        },
-        {
-            id: 5,
-            restaurant: "Bistro6",
-            type: "arabesc",
-            category: "paste",
-            name: "Paste",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar.",
-            price: 20
-        }
-    ],
-    productsInCart = [];
-    orderStored = [];
+productsInCart = [];
+orderStored = [];
+//restaurants category: check for hash in url 
+if(window.location.hash){
+	window.addEventListener('load',function(){
+		let hashNr = window.location.hash.substr(1);
+		filterCategory(hashNr);
+	});
+	window.addEventListener("hashchange", function(){
+		var hash = window.location.hash.substr(1);
+		filterCategory(hash);
+	});
+}
 
-var generateProductList = function() {
-    products.forEach(function(item) {
-        var productEl = document.createElement("tr");
-        productEl.innerHTML = `<td class="product-name"> 
-                                <span class="product-name">${item.name}</span>
-                                <span class="product-description">${item.description}</span>
-                            </td>
-                            <td>
-                                <span class="product-price">${item.price} lei</span>
-                                <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
-                            </td>`;
-        if (tableItems) {
-            checkTableId(item.category, productEl);
-        }
-    });
+//display restaurants
+var restaurantsUrl = 'http://localhost:3000/restaurants';
+fetch(restaurantsUrl)
+.then((resp) => resp.json())
+.then((data) => {
+	displayData(data);
+});
+
+var displayData = function(dataD){
+	var container = document.querySelector('.container--restaurants .boxes');
+	dataD.forEach(param => {
+		var div =  document.createElement("div");
+		div.classList.add('boxes_item', 'boxes_item--'+param.class);
+		div.innerHTML = `<div class="boxes_item-content">
+		<a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
+		</div>`;
+		if(container){
+			container.appendChild(div);
+		}
+		
+		// console.log(param);
+	});
+}
+
+//display category buttons
+var categoryUrl = 'http://localhost:3000/category';
+fetch(categoryUrl)
+.then(resp => resp.json())
+.then(dataC => {
+	buttonsCategory(dataC);
+});
+
+var buttonsCategory = function(dataId){
+	var containerC = document.querySelector('.categoies-list');
+	dataId.forEach(item => {
+		var li =  document.createElement("li");
+		li.innerHTML = `<a href="#${item.id}">${item.name}</a>`;
+		containerC ? containerC.appendChild(li) : false;
+	});
+}
+
+//filter restaurants by category
+var filterCategory = function(categID){
+	let filterUrl = `http://localhost:3000/category/${categID}/restaurants`;
+	fetch(filterUrl)
+	.then(res => res.json())
+	.then(filResult => {
+		var container = document.querySelector('.container--restaurants .boxes');
+		container ? container.innerHTML = "": false;
+		filResult.forEach(param => {
+			var div =  document.createElement("div");
+			div.classList.add('boxes_item', 'boxes_item--'+param.class);
+			div.innerHTML = `<div class="boxes_item-content">
+			<a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
+			</div>`;
+			container ? container.appendChild(div) : false;
+			
+		});
+	})
+}
+let UrlSplit = location.search.split('restaurantId=')[1];
+	var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplit}`;
+	fetch(foodUrl)
+	.then(res => res.json())
+	.then(foodRes => {
+		// console.log(foodRes);
+		orderList ? orderList.innerHTML = "" : false;
+		
+		 foodRes.forEach(function(item, index) {
+	        var productEl = document.createElement("tr");
+	        productEl.innerHTML = `<td class="product-name"> 
+	                                <span class="product-name">${item.name}</span>
+	                                <span class="product-description">${item.description}</span>
+	                            </td>
+	                            <td>
+	                                <span class="product-price">${item.price} lei</span>
+	                                <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
+	                            </td>`;
+	        if (tableItems) {
+	            checkTableId(item.category, productEl);
+	        }
+	    });
+
+	});
+
+var UrlSplitF = location.search.split('restaurantId=')[1];
+var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplitF}`;
+
+fetch(foodUrl)
+.then( res => res.json())
+.then(addFood => {
+	//console.log(addFood);
+	addFood.forEach( element => {
+		//console.log("element: ", element.name);
+		addToCart(element.id, element);
+	});
+});
+
+
+var generateProductList = function(resUrl){
+	
+	fetch(foodUrl)
+	.then(res => res.json())
+	.then(foodRes => {
+		// console.log(foodRes);
+		orderList ? orderList.innerHTML = "" : false;
+		
+		 foodRes.forEach(function(item, index) {
+	        var productEl = document.createElement("tr");
+	        productEl.innerHTML = `<td class="product-name"> 
+	                                <span class="product-name">${item.name}</span>
+	                                <span class="product-description">${item.description}</span>
+	                            </td>
+	                            <td>
+	                                <span class="product-price">${item.price} lei</span>
+	                                <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
+	                            </td>`;
+	        if (tableItems) {
+	            checkTableId(item.category, productEl);
+	        }
+	    });
+
+	});
+	console.log(UrlSplit);
 }
 var checkTableId = function(checkId, prod) {
     var parent = document.getElementById(checkId);
@@ -146,7 +165,10 @@ var checkTableId = function(checkId, prod) {
         if (checkId === index.id) {
             var children = parent.querySelector('.table-items');
             children.appendChild(prod);
+            parent.querySelector('h3').innerHTML = checkId;
         }
+
+        // console.log(index);
     });
 }
 
@@ -156,17 +178,16 @@ var generateCartList = function() {
         var tr = document.createElement("tr");
         tr.classList.add('order-box_item');
 
-        tr.innerHTML = `<td class="remove-button"><a href="#0" id="itm${item.product.id}" class="remove" data-id=${index}>X</a></td>
-                      <td class="order-box_item order-box_item-name"><span>${item.product.name}</span></td>
+        tr.innerHTML = `<td class="remove-button"><a href="#0" id="itm${item.id}" class="remove" data-id=${index}>X</a></td>
+                      <td class="order-box_item order-box_item-name"><span>${item.name}</span></td>
                       <td class="order-box_item order-box_item-quantity"><span>${item.quantity}</span></td>
-                      <td class="order-box_item order-box_item-price"><span>${item.product.price * item.quantity} lei</span></td>`;
+                      <td class="order-box_item order-box_item-price"><span>${item.price * item.quantity} lei</span></td>`;
 
         orderList.appendChild(tr);
     });
     productQuantityEl.innerHTML = productsInCart.length;
     generateCartButtons()
 }
-
 var generateCartButtons = function() {
     if (productsInCart.length > 0) {
         emptyCartEl.style.display = "block";
@@ -177,8 +198,6 @@ var generateCartButtons = function() {
 }
 
 var setupListeners = function() {
-
-
     productsMenu.forEach(function(index) {
         var parent = document.getElementById(index.id);
 
@@ -190,13 +209,10 @@ var setupListeners = function() {
                 addToCart(buttonId);
             }
 
-            console.log(productsInCart);
+            //console.log(productsInCart);
 
         });
     })
-
-
-
     tableCart.addEventListener('click', function(event) {
         var btnRem = event.target;
         if (btnRem.classList.contains("remove")) {
@@ -236,7 +252,7 @@ var sendOrder = function() {
     var orderProducts = productsInCart.map(function(item, index) {
         return productsInCart[index]
     });
-    console.log(orderProducts);
+    // console.log(orderProducts);
     orderStored.push({
         "city": city,
         "address": address,
@@ -249,22 +265,25 @@ var sendOrder = function() {
 var storeMyOrder = function() {
     var getOrder = localStorage.getItem('order');
     var displayConfirmOrder = JSON.parse(getOrder);
-    console.log(displayConfirmOrder);
+    // console.log(displayConfirmOrder);
 }
 
-var addToCart = function(id) {
-    var obj = products[id];
-    if (productsInCart.length === 0 || productFound(obj.id) === undefined) {
+var addToCart = function(elemId,elem) {
+	console.log(elem);
+	// console.log(el);
+    if (productsInCart.length === 0 || productFound(elemId) === undefined) {
+    	
         productsInCart.push({
-            product: obj,
+            product: elem.name,
             quantity: 1,
-            name: obj.name
+            price: elem.price
         });
     } else {
         productsInCart.forEach(function(item) {
-            if (item.product.id === obj.id) {
+            if (item.id === el) {
                 item.quantity++;
             }
+           
         });
     }
     generateCartList();
@@ -279,60 +298,18 @@ var removeItemFromCart = function(itemId) {
 }
 var productFound = function(productId) {
     return productsInCart.find(function(item) {
-        return item.product.id === productId;
+        return item.id === productId;
     });
 }
 
 var calculateTotalPrice = function() {
     return productsInCart.reduce(function(total, item) {
-        return total + (item.product.price * item.quantity);
+        return total + (item.price * item.quantity);
     }, 0);
-}
-var generateRestaurants = function() {
-
-}
-
-var restaurantsCateg = function() {
-    products.forEach(function(item) {
-        var restaurantEl = document.createElement('div');
-        restaurantEl.classList.add('boxes_item', 'boxes_item--indian');
-        restaurantEl.innerHTML = `<div class="boxes_item-content">
-                                    <a href="order.html?page=${item.restaurant}" class="link"><span class="link-text">${item.restaurant}</span> <i class="fas fa-arrow-right"></i></a>
-                                 </div>`;
-    
-
-        if (boxes) {
-            boxes.appendChild(restaurantEl);
-        }
-    });
-}
-
-
-var findRestaurants = function(myRestaurants, title) {
-    var titleReturned = myRestaurants.find(function(item, index) {
-        return item.restaurant.toLowerCase() === title.toLowerCase();
-    });
-    return titleReturned;
-}
-
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-        vars[key] = value;
-
-    });
-    return vars.page;
-}
-console.log(getUrlVars());
-var pageTitle = document.querySelector('.container-title > h1');
-if (getUrlVars()) {
-    pageTitle.textContent = getUrlVars();
-}
-
+}   
 var init = function() {
     generateProductList();
-    restaurantsCateg();
+    // restaurantsCateg();
     setupListeners();
 
 }

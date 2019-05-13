@@ -3,9 +3,10 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="css/style.css">
-      
+      <script type="text/javascript" src="js/script.js"></script>
       <title>Let's Eat</title>
    </head>
    <body id="body">
@@ -14,8 +15,9 @@
             <span>LeT's EaT</span>
          </div>
          <div class="header_desktop-content">
+            <!--  <div class="login"><a href="login.html">Log in</a></div> -->
             <nav class="nav">
-                <ul>
+               <ul>
                   <li><a href="index.html">Home</a></li>
                   <li><a href="about.html">About</a></li>
                   <li><a href="restaurants.html">Restaurants</a></li>
@@ -25,7 +27,7 @@
             </nav>
             <div class="search">
                <form>
-                  <input type="search" name="search" onkeyup="findRestaurants()" placeholder="Search...">
+                  <input type="search" name="search" placeholder="Search...">
                   <button><i class="fas fa-search"></i></button>
                </form>
             </div>
@@ -39,8 +41,8 @@
                      <button><i class="fas fa-search"></i></button>
                   </form>
                </div>
-                <nav class="nav--mobile">
-                   <ul>
+               <nav class="nav--mobile">
+                  <ul>
                      <li><a href="index.html">Home</a></li>
                      <li><a href="about.html">About</a></li>
                      <li><a href="restaurants.html">Restaurants</a></li>
@@ -52,46 +54,49 @@
          </div>
       </header>
       <main>
-         <section class="banner">
-            <div class="banner-content">
-               <div class="banner-slider">
-                  <div class="slider-item">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar. Etiam enim dui, luctus id consequat a, bibendum in turpis. Nam ut felis lorem. Proin finibus, libero in pharetra dictum, risus leo gravida justo, sit amet tempus nisl nunc vel dui. Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
-                     <a href="#" class="button">Comanda</a>
+         <section class="container container--home">
+            <div class="container-content clearfix">
+               <h1 class="title">Let's seat <br>and let's eat</h1>
+               <div class="promo float-left">
+                  <div class="promo-box">
+                     <div class="promo-box--inner">
+                        <div class="slider">
+                           <span class="box-title">Promotii</span>
+                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada quis dolor ut tincidunt. Morbi facilisis justo ac mauris feugiat pulvinar. Etiam enim dui, luctus id consequat a, bibendum in turpis. Nam ut felis lorem. Proin finibus, libero in pharetra dictum, risus leo gravida justo, sit amet tempus nisl nunc vel dui. Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="promo-box">
+                     <div class="promo-box--inner">
+                        <span class="box-title">Categorii</span>
+                        <ul class="categoies-list">
+                           <li><a data-target="traditional" href="restaurants.html">Traditional</a></li>
+                           <li><a data-target="chinezesc" href="restaurants.html">Chinezesc</a></li>
+                           <li><a data-target="arabesc" href="restaurants.html">Arabesc</a></li>
+                           <li><a data-target="fastfood" href="restaurants.html">Fast Food</a></li>
+                           <li><a data-target="pizza" href="restaurants.html">Pizza</a></li>
+                           <li><a data-target="rawvegan" href="restaurants.html">Raw Vegan</a></li>
+                        </ul>
+                     </div>
                   </div>
                </div>
-               <div class="categories categories--desktop">
-                  <ul>
-                     <li><a href="#traditional">Traditional</a></li>
-                     <li><a href="#chinezesc">Chinezesc</a></li>
-                     <li><a href="#arabesc">Arabesc</a></li>
-                     <li><a href="#fastfood">Fast Food</a></li>
-                     <li><a href="#pizza">Pizza</a></li>
-                     <li><a href="#rawvegan">Raw Vegan</a></li>
-                  </ul>
-               </div>
-
-            </div>
-         </section>
-         <section class="container">
-            <div class="categories categories--mobile">
-                  <div class="categories_dropdown" id="categoriesD" onclick="displayCatNav();"><span>Categorii mancare</span> <i class="fas fa-angle-down"></i>
+               <div class="quick-order float-right">
+                  <div class="smiley"><i class="far fa-smile-beam"></i></div>
+                  <div class="quick-order_content">
+                     <div class="quick-order--inner">
+                        <p>Maecenas tristique eu justo vitae lobortis. Aenean condimentum orci quis tincidunt ultricies. In commodo vel mauris vitae elementum.</p>
+                        <div class="quick-order_select">
+                           <span id="pick" onclick="toggleRestaurants();">Alege restaurantul</span>
+                           <ul>
+                              <li><a href="order.html?page=Babs">Babs</a></li>
+                              <li><a href="order.html?page=Bistro26">Bisto Carol 26</a></li>
+                              <li><a href="order.html?page=Mudi">Mudi</a></li>
+                              <li><a href="order.html?page=Geppetto">Geppetto</a></li>
+                              <li><a href="order.html?page=GrillHouse">Grill House</a></li>
+                           </ul>
+                        </div>
+                     </div>
                   </div>
-                  <ul>
-                     <li><a href="#traditional">Traditional</a></li>
-                     <li><a href="#chinezesc">Chinezesc</a></li>
-                     <li><a href="#arabesc">Arabesc</a></li>
-                     <li><a href="#fastfood">Fast Food</a></li>
-                     <li><a href="#pizza">Pizza</a></li>
-                     <li><a href="#rawvegan">Raw Vegan</a></li>
-                  </ul>
-            </div>
-            <div class="container-content">
-               <div class="container-title">
-                  <h1>Restaurante</h1>
-               </div>
-               <div class="boxes">
-                 
                </div>
             </div>
          </section>
@@ -112,6 +117,5 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
          </div>
       </footer>
-      <script type="text/javascript" src="js/script.js"></script>
    </body>
 </html>
