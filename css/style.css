@@ -599,18 +599,22 @@ span.link-text {
 }
 
 .boxes_item--pizza .boxes_item-content {
-    background-image: url(../images/alex-munsell-18753-unsplash.jpg);
+    background-image: url(../images/pizza.jpg);
 }
 
-.boxes_item--indian .boxes_item-content {
+.boxes_item--traditional .boxes_item-content {
     background-image: url(../images/ankit-sinha-637752-unsplash.jpg);
 }
 
-.boxes_item--salad .boxes_item-content {
-    background-image: url(../images/eaters-collective-132773-unsplash.jpg);
+.boxes_item--greek .boxes_item-content {
+    background-image: url(../images/eat1.jpg);
 }
-
-
+.boxes_item--arabic .boxes_item-content{
+    background-image: url(../images/food.jpg);
+}
+.boxes_item--fastfood .boxes_item-content{
+    background-image: url(../images/indian.jpg);
+}
 /*end Home*/
 
 
