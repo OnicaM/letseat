@@ -24,14 +24,14 @@ productsInCart = [];
 orderStored = [];
 //restaurants category: check for hash in url 
 if(window.location.hash){
-	window.addEventListener('load',function(){
-		let hashNr = window.location.hash.substr(1);
-		filterCategory(hashNr);
-	});
-	window.addEventListener("hashchange", function(){
-		var hash = window.location.hash.substr(1);
-		filterCategory(hash);
-	});
+    window.addEventListener('load',function(){
+        let hashNr = window.location.hash.substr(1);
+        filterCategory(hashNr);
+    });
+    window.addEventListener("hashchange", function(){
+        var hash = window.location.hash.substr(1);
+        filterCategory(hash);
+    });
 }
 
 //display restaurants
@@ -39,23 +39,23 @@ var restaurantsUrl = 'http://localhost:3000/restaurants';
 fetch(restaurantsUrl)
 .then((resp) => resp.json())
 .then((data) => {
-	displayData(data);
+    displayData(data);
 });
 
 var displayData = function(dataD){
-	var container = document.querySelector('.container--restaurants .boxes');
-	dataD.forEach(param => {
-		var div =  document.createElement("div");
-		div.classList.add('boxes_item', 'boxes_item--'+param.class);
-		div.innerHTML = `<div class="boxes_item-content">
-		<a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
-		</div>`;
-		if(container){
-			container.appendChild(div);
-		}
-		
-		// console.log(param);
-	});
+    var container = document.querySelector('.container--restaurants .boxes');
+    dataD.forEach(param => {
+        var div =  document.createElement("div");
+        div.classList.add('boxes_item', 'boxes_item--'+param.class);
+        div.innerHTML = `<div class="boxes_item-content">
+        <a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
+        </div>`;
+        if(container){
+            container.appendChild(div);
+        }
+        
+        // console.log(param);
+    });
 }
 
 //display category buttons
@@ -63,102 +63,83 @@ var categoryUrl = 'http://localhost:3000/category';
 fetch(categoryUrl)
 .then(resp => resp.json())
 .then(dataC => {
-	buttonsCategory(dataC);
+    buttonsCategory(dataC);
 });
 
+var windowLocationR = (window.location.href.indexOf('restaurants') > -1);
+var windowLocation = window.location.pathname;
+console.log(windowLocation.lastIndexOf('restaurants'));
 var buttonsCategory = function(dataId){
-	var containerC = document.querySelector('.categoies-list');
-	dataId.forEach(item => {
-		var li =  document.createElement("li");
-		li.innerHTML = `<a href="#${item.id}">${item.name}</a>`;
-		containerC ? containerC.appendChild(li) : false;
-	});
+    var containerC = document.querySelector('.categoies-list');
+    if(!windowLocation.lastIndexOf('restaurants') > -1){
+        var path = windowLocation.split("/");
+        path[path.length - 1] = "restaurants.html";
+        var newUrl = path.join("/");
+        dataId.forEach(item => {
+            var li =  document.createElement("li");
+            li.innerHTML = `<a href="${newUrl}#${item.id}">${item.name}</a>`;
+            containerC ? containerC.appendChild(li) : false;
+
+        });
+    }else{
+        dataId.forEach(item => {
+            var li =  document.createElement("li");
+            li.innerHTML = `<a href="${windowLocation}#${item.id}">${item.name}</a>`;
+            containerC ? containerC.appendChild(li) : false;
+
+        });
+    }
 }
 
 //filter restaurants by category
 var filterCategory = function(categID){
-	let filterUrl = `http://localhost:3000/category/${categID}/restaurants`;
-	fetch(filterUrl)
-	.then(res => res.json())
-	.then(filResult => {
-		var container = document.querySelector('.container--restaurants .boxes');
-		container ? container.innerHTML = "": false;
-		filResult.forEach(param => {
-			var div =  document.createElement("div");
-			div.classList.add('boxes_item', 'boxes_item--'+param.class);
-			div.innerHTML = `<div class="boxes_item-content">
-			<a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
-			</div>`;
-			container ? container.appendChild(div) : false;
-			
-		});
-	})
+    let filterUrl = `http://localhost:3000/category/${categID}/restaurants`;
+    fetch(filterUrl)
+    .then(res => res.json())
+    .then(filResult => {
+        var container = document.querySelector('.container--restaurants .boxes');
+        container ? container.innerHTML = "": false;
+        filResult.forEach(param => {
+            var div =  document.createElement("div");
+            div.classList.add('boxes_item', 'boxes_item--'+param.class);
+            div.innerHTML = `<div class="boxes_item-content">
+            <a href="order.html?restaurantId=${param.id}" class="link"><span class="link-text">${param.name}</span> <i class="fas fa-arrow-right"></i></a>
+            </div>`;
+            container ? container.appendChild(div) : false;
+            
+        });
+    })
 }
 let UrlSplit = location.search.split('restaurantId=')[1];
-	var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplit}`;
-	fetch(foodUrl)
-	.then(res => res.json())
-	.then(foodRes => {
-		// console.log(foodRes);
-		orderList ? orderList.innerHTML = "" : false;
-		
-		 foodRes.forEach(function(item, index) {
-	        var productEl = document.createElement("tr");
-	        productEl.innerHTML = `<td class="product-name"> 
-	                                <span class="product-name">${item.name}</span>
-	                                <span class="product-description">${item.description}</span>
-	                            </td>
-	                            <td>
-	                                <span class="product-price">${item.price} lei</span>
-	                                <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
-	                            </td>`;
-	        if (tableItems) {
-	            checkTableId(item.category, productEl);
-	        }
-	    });
-
-	});
-
-var UrlSplitF = location.search.split('restaurantId=')[1];
-var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplitF}`;
-
-fetch(foodUrl)
-.then( res => res.json())
-.then(addFood => {
-	//console.log(addFood);
-	addFood.forEach( element => {
-		//console.log("element: ", element.name);
-		addToCart(element.id, element);
-	});
-});
-
+var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplit}`;
 
 var generateProductList = function(resUrl){
-	
-	fetch(foodUrl)
-	.then(res => res.json())
-	.then(foodRes => {
-		// console.log(foodRes);
-		orderList ? orderList.innerHTML = "" : false;
-		
-		 foodRes.forEach(function(item, index) {
-	        var productEl = document.createElement("tr");
-	        productEl.innerHTML = `<td class="product-name"> 
-	                                <span class="product-name">${item.name}</span>
-	                                <span class="product-description">${item.description}</span>
-	                            </td>
-	                            <td>
-	                                <span class="product-price">${item.price} lei</span>
-	                                <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
-	                            </td>`;
-	        if (tableItems) {
-	            checkTableId(item.category, productEl);
-	        }
-	    });
+    
+    fetch(foodUrl)
+    .then(res => res.json())
+    .then(foodRes => {
+        // console.log(foodRes);
+        orderList ? orderList.innerHTML = "" : false;
+        
+         foodRes.forEach(function(item, index) {
+            var productEl = document.createElement("tr");
+            productEl.innerHTML = `<td class="product-name"> 
+                                    <span class="product-name">${item.name}</span>
+                                    <span class="product-description">${item.description}</span>
+                                </td>
+                                <td>
+                                    <span class="product-price">${item.price} lei</span>
+                                    <span class="product-add-to-cart"><a href="#0" class="add-to-cart" data-id=${item.id}>Add+</a></span>
+                                </td>`;
+            if (tableItems) {
+                checkTableId(item.category, productEl);
+            }
+        });
 
-	});
-	console.log(UrlSplit);
+    });
+    //console.log(UrlSplit);
 }
+
 var checkTableId = function(checkId, prod) {
     var parent = document.getElementById(checkId);
     productsMenu.forEach(function(index) {
@@ -268,24 +249,47 @@ var storeMyOrder = function() {
     // console.log(displayConfirmOrder);
 }
 
-var addToCart = function(elemId,elem) {
-	console.log(elem);
-	// console.log(el);
-    if (productsInCart.length === 0 || productFound(elemId) === undefined) {
-    	
-        productsInCart.push({
-            product: elem.name,
-            quantity: 1,
-            price: elem.price
-        });
-    } else {
-        productsInCart.forEach(function(item) {
-            if (item.id === el) {
-                item.quantity++;
+var addToCart = function(elemId) {
+    console.log(elemId);
+
+    //====================================================
+    var UrlSplitF = location.search.split('restaurantId=')[1];
+    var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplitF}`;
+
+    fetch(foodUrl)
+    .then( res => res.json())
+    .then(addFood => {
+     
+        // addFood.forEach( element => {
+           console.log(addFood);
+            var obj = addFood.find(function (obj) { return obj.id === elemId; });
+             if (productsInCart.length === 0 || productFound(obj.id) === undefined) {
+                
+              
+                    // console.log(element);
+                    productsInCart.push({
+                        product: obj.name,
+                        quantity: 1,
+                        price: obj.price
+                    
+                    });
+                
+
+            } else {
+                productsInCart.forEach(function(item) {
+                    if (item.id === element.id) {
+                        item.quantity++;
+                    }
+                   
+                });
             }
-           
-        });
-    }
+        // });
+    });
+    //=================================================
+
+
+
+   
     generateCartList();
 }
 var removeItemFromCart = function(itemId) {
