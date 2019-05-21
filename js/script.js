@@ -22,6 +22,8 @@ var tablePasta = document.querySelector('#paste .table-items'),
 
 productsInCart = [];
 orderStored = [];
+
+
 //restaurants category: check for hash in url 
 if(window.location.hash){
     window.addEventListener('load',function(){
@@ -54,7 +56,6 @@ var displayData = function(dataD){
             container.appendChild(div);
         }
         
-        // console.log(param);
     });
 }
 
@@ -114,13 +115,10 @@ let UrlSplit = location.search.split('restaurantId=')[1];
 var foodUrl = `http://localhost:3000/food?restaurantsId=${UrlSplit}`;
 
 var generateProductList = function(resUrl){
-    
     fetch(foodUrl)
     .then(res => res.json())
     .then(foodRes => {
-        // console.log(foodRes);
         orderList ? orderList.innerHTML = "" : false;
-        
          foodRes.forEach(function(item, index) {
             var productEl = document.createElement("tr");
             productEl.innerHTML = `<td class="product-name"> 
@@ -135,9 +133,8 @@ var generateProductList = function(resUrl){
                 checkTableId(item.category, productEl);
             }
         });
-
     });
-    //console.log(UrlSplit);
+    
 }
 
 var checkTableId = function(checkId, prod) {
@@ -148,13 +145,12 @@ var checkTableId = function(checkId, prod) {
             children.appendChild(prod);
             parent.querySelector('h3').innerHTML = checkId;
         }
-
-        // console.log(index);
     });
 }
 
 var generateCartList = function() {
     orderList.innerHTML = "";
+    console.log(productsInCart);
     productsInCart.forEach(function(item, index) {
         var tr = document.createElement("tr");
         tr.classList.add('order-box_item');
@@ -167,8 +163,9 @@ var generateCartList = function() {
         orderList.appendChild(tr);
     });
     productQuantityEl.innerHTML = productsInCart.length;
-    generateCartButtons()
+    generateCartButtons();
 }
+
 var generateCartButtons = function() {
     if (productsInCart.length > 0) {
         emptyCartEl.style.display = "block";
@@ -189,43 +186,49 @@ var setupListeners = function() {
                 var buttonId = button.dataset.id;
                 addToCart(buttonId);
             }
-
-            //console.log(productsInCart);
-
+            console.log(productsInCart);
         });
     })
-    tableCart.addEventListener('click', function(event) {
-        var btnRem = event.target;
-        if (btnRem.classList.contains("remove")) {
-            var btnRemId = btnRem.dataset.id;
-            console.log("Button target: " + btnRemId);
-            removeItemFromCart(btnRemId);
-        }
-    });
-    emptyCartEl.addEventListener("click", function(event) {
-        if (confirm("Are you sure?")) {
+    if(tableCart){
+        tableCart.addEventListener('click', function(event) {
+            var btnRem = event.target;
+            if (btnRem.classList.contains("remove")) {
+                var btnRemId = btnRem.dataset.id;
+                console.log("Button target: " + btnRemId);
+                removeItemFromCart(btnRemId);
+            }
+        });
+    }
+    
+    if(emptyCartEl){
+        emptyCartEl.addEventListener("click", function(event) {
+            if (confirm("Are you sure?")) {
+                productsInCart = [];
+            }
+            generateCartList();
+        });
+    }
+    
+    if(send){
+        send.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (productsInCart.length >= 1) {
+                sendOrder();
+                var cont = document.querySelector('.container-content_right');
+                var divSuccess = document.createElement('div');
+                var message = `<p class="success">Comanda a fost inregistrata cu succes!</p> `;
+                divSuccess.innerHTML = message;
+                storeMyOrder();
+            }
+            cont.appendChild(divSuccess);
             productsInCart = [];
-        }
-        generateCartList();
-    });
-    send.addEventListener("click", function(e) {
-        e.preventDefault();
-        if (productsInCart.length >= 1) {
-            sendOrder();
-            var cont = document.querySelector('.container-content_right');
-            var divSuccess = document.createElement('div');
-            var message = `<p class="success">Comanda a fost inregistrata cu succes!</p> `;
-            divSuccess.innerHTML = message;
-            storeMyOrder();
-        }
-        cont.appendChild(divSuccess);
-        productsInCart = [];
 
-        generateCartList();
+            generateCartList();
 
-    });
-
+        });
+    }
 }
+
 var sendOrder = function() {
     var city = document.getElementById('selectCity').value;
     var address = document.getElementById('address').value;
@@ -233,7 +236,7 @@ var sendOrder = function() {
     var orderProducts = productsInCart.map(function(item, index) {
         return productsInCart[index]
     });
-    // console.log(orderProducts);
+    
     orderStored.push({
         "city": city,
         "address": address,
@@ -246,7 +249,12 @@ var sendOrder = function() {
 var storeMyOrder = function() {
     var getOrder = localStorage.getItem('order');
     var displayConfirmOrder = JSON.parse(getOrder);
-    // console.log(displayConfirmOrder);
+}
+
+var productFound = function(productId) {
+    return productsInCart.find(function(item) {
+        return item.id === productId;
+    });
 }
 
 var addToCart = function(elemId) {
@@ -260,15 +268,14 @@ var addToCart = function(elemId) {
     .then( res => res.json())
     .then(addFood => {
      
-        // addFood.forEach( element => {
-           console.log(addFood);
-            var obj = addFood.find(function (obj) { return obj.id === elemId; });
+            var obj = addFood.find(function (obj) { return obj.id == elemId; });
+
+            console.log(obj);
              if (productsInCart.length === 0 || productFound(obj.id) === undefined) {
                 
-              
-                    // console.log(element);
                     productsInCart.push({
-                        product: obj.name,
+                        id: obj.id,
+                        name: obj.name,
                         quantity: 1,
                         price: obj.price
                     
@@ -277,19 +284,16 @@ var addToCart = function(elemId) {
 
             } else {
                 productsInCart.forEach(function(item) {
-                    if (item.id === element.id) {
+                    if (item.id === obj.id) {
                         item.quantity++;
                     }
                    
                 });
             }
-        // });
+    
     });
     //=================================================
 
-
-
-   
     generateCartList();
 }
 var removeItemFromCart = function(itemId) {
@@ -300,11 +304,7 @@ var removeItemFromCart = function(itemId) {
     }
     generateCartList();
 }
-var productFound = function(productId) {
-    return productsInCart.find(function(item) {
-        return item.id === productId;
-    });
-}
+
 
 var calculateTotalPrice = function() {
     return productsInCart.reduce(function(total, item) {
